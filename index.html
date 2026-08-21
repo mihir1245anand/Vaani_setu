@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vaani-Setu — One Conversation. Every Government Benefit.</title>
+<meta name="description" content="Vaani-Setu is a voice-first multilingual AI prototype for discovering and understanding government schemes."/>
+<style>
+:root{
+  --navy:#082b5c; --blue:#0b63ce; --blue2:#eaf3ff; --saffron:#f59e0b;
+  --green:#15945b; --ink:#12213a; --muted:#60708a; --bg:#f7f9fc; --white:#fff;
+  --line:#dfe7f1; --shadow:0 18px 55px rgba(13,45,84,.10); --r:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+button,input,select{font:inherit} button{cursor:pointer}
+a{text-decoration:none;color:inherit}.container{width:min(1160px,92%);margin:auto}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(223,231,241,.8)}
+.nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.04em;color:var(--navy)}
+.logo-mark{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,var(--navy),var(--blue));display:grid;place-items:center;color:#fff;box-shadow:0 8px 20px rgba(11,99,206,.25)}
+.logo-mark svg{width:23px}
+.links{display:flex;gap:24px;font-size:14px;color:#53637b}.links a:hover{color:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:10px}.lang{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;color:#43536b}
+.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:800;transition:.2s transform,.2s box-shadow,.2s background}
+.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--navy);color:#fff;box-shadow:0 10px 24px rgba(8,43,92,.22)}
+.btn-orange{background:var(--saffron);color:#1f2937}.btn-light{background:#fff;border:1px solid var(--line);color:var(--navy)}
+.menu{display:none;border:0;background:#fff;font-size:25px}
+.hero{padding:76px 0 56px;background:radial-gradient(circle at 82% 15%,#dceeff 0,transparent 34%),linear-gradient(180deg,#fff 0,#f7f9fc 100%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:#edf7f2;color:#087c4a;font-weight:800;font-size:12px;border:1px solid #d6eee3}
+.kicker span{width:7px;height:7px;background:#18a765;border-radius:50%;box-shadow:0 0 0 5px #d9f4e8}
+h1{font-size:clamp(43px,5.6vw,72px);line-height:1.02;letter-spacing:-.055em;margin:18px 0;color:var(--navy)}
+.hero p{font-size:18px;color:var(--muted);max-width:640px}.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.trust{display:flex;gap:18px;flex-wrap:wrap;color:#6b7890;font-size:13px}.trust b{color:var(--navy)}
+.voice-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px;position:relative;overflow:hidden}
+.voice-card:before{content:"";position:absolute;inset:-100px -80px auto auto;width:220px;height:220px;background:#eaf3ff;border-radius:50%}
+.card-head{display:flex;justify-content:space-between;align-items:center;position:relative}.status{font-size:12px;font-weight:800;color:#087c4a;background:#edf7f2;padding:7px 10px;border-radius:999px}
+.chat{display:flex;flex-direction:column;gap:13px;margin:22px 0}.bubble{max-width:88%;padding:14px 15px;border-radius:18px;font-size:14px}.user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:5px}.ai{background:#f1f6fb;border:1px solid #e1eaf4;border-bottom-left-radius:5px}
+.wave{display:flex;align-items:center;gap:4px;height:42px}.bar{width:4px;border-radius:10px;background:var(--blue);animation:wave 1.1s ease-in-out infinite}.bar:nth-child(2){animation-delay:.12s}.bar:nth-child(3){animation-delay:.24s}.bar:nth-child(4){animation-delay:.36s}.bar:nth-child(5){animation-delay:.48s}
+@keyframes wave{0%,100%{height:10px;opacity:.45}50%{height:34px;opacity:1}}
+.voice-controls{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:16px}.mic{width:52px;height:52px;border-radius:50%;border:0;background:var(--saffron);display:grid;place-items:center;font-size:22px}.mic.listening{animation:pulse 1.2s infinite;background:#ef4444;color:#fff}@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(239,68,68,.13)}}
+.voice-input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px 14px;outline:none}.voice-input:focus{border-color:#8ab9ee;box-shadow:0 0 0 4px #eaf3ff}
+section{padding:82px 0}.section-head{max-width:720px;margin-bottom:34px}.eyebrow{color:var(--blue);font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.section-head h2{font-size:clamp(31px,4vw,48px);line-height:1.08;letter-spacing:-.04em;color:var(--navy);margin:10px 0}.section-head p{color:var(--muted);font-size:17px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:0 10px 35px rgba(20,50,90,.055)}
+.icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--blue2);font-size:21px;margin-bottom:16px}.card h3{margin:0 0 8px;color:var(--navy)}.card p{margin:0;color:var(--muted);font-size:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center;margin-top:24px}.flow div{background:#fff;border:1px solid var(--line);padding:16px;border-radius:16px;text-align:center;font-weight:800;font-size:13px}.flow i{font-style:normal;color:#98a7bb;text-align:center}
+.solution{background:#fff}.feature{min-height:185px}.num{font-size:12px;font-weight:900;color:var(--saffron)}
+.demo-wrap{background:linear-gradient(145deg,#071f43,#0a3d7e);border-radius:30px;padding:24px;color:#fff;box-shadow:0 25px 65px rgba(8,43,92,.25)}
+.demo-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.panel{background:rgba(255,255,255,.97);color:var(--ink);border-radius:22px;padding:20px}.panel.dark{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)}
+.chatbox{height:340px;overflow:auto;padding-right:4px}.demo-input{display:flex;gap:8px;margin-top:14px}.demo-input input{flex:1;border:1px solid var(--line);border-radius:12px;padding:12px}.scheme-list{display:grid;gap:12px}.scheme{border:1px solid var(--line);border-radius:17px;padding:15px}.scheme-top{display:flex;justify-content:space-between;gap:10px}.match{color:#087c4a;background:#edf7f2;padding:5px 8px;border-radius:999px;font-weight:900;font-size:12px;white-space:nowrap}.scheme small{color:var(--muted)}.scheme p{font-size:13px;margin:7px 0;color:#56667d}.scheme button{border:0;background:#eaf3ff;color:var(--blue);font-weight:800;border-radius:10px;padding:8px 10px}
+.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}.filters select{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;color:#4a5a70}
+.badge{display:inline-block;font-size:11px;font-weight:900;padding:5px 8px;border-radius:999px;background:#f1f5f9;color:#526176}
+.score{font-size:28px;font-weight:950;color:var(--blue);letter-spacing:-.04em}.scheme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.checker{display:grid;grid-template-columns:220px 1fr;gap:25px}.steps{display:grid;gap:8px}.step{padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#fff;color:#6a7890;font-weight:800}.step.active{background:#eaf3ff;color:var(--blue);border-color:#bdd9f8}.formbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px}.progress{height:8px;background:#edf1f6;border-radius:99px;overflow:hidden;margin:14px 0 24px}.progress span{display:block;height:100%;background:var(--blue);width:66%}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:12px;font-weight:900;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid var(--line);padding:12px;border-radius:12px}.results{display:grid;gap:12px;margin-top:20px}.result{border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;justify-content:space-between;gap:20px;align-items:center}.result p{margin:4px 0;color:var(--muted);font-size:13px}.docs{display:grid;grid-template-columns:1fr 1fr;gap:24px}.doc-item{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.doc-item input{width:18px;height:18px}.barline{height:10px;background:#edf1f6;border-radius:99px;overflow:hidden}.barline span{display:block;height:100%;background:var(--green);width:71%}
+.timeline{position:relative;display:grid;gap:20px}.timeline:before{content:"";position:absolute;left:20px;top:20px;bottom:20px;width:2px;background:#d8e3ef}.titem{display:grid;grid-template-columns:42px 1fr;gap:15px;position:relative}.tnum{width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900;z-index:1}.titem h3{margin:2px 0 4px;color:var(--navy)}.titem p{margin:0;color:var(--muted)}
+.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch}.arch .node{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center;font-weight:800;box-shadow:0 8px 22px rgba(20,50,90,.05)}.arch .node small{display:block;color:var(--muted);font-weight:500;margin-top:5px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare .card:first-child{border-top:4px solid #94a3b8}.compare .card:last-child{border-top:4px solid var(--saffron)}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center}.metric strong{display:block;font-size:28px;color:var(--navy)}.metric span{font-size:12px;color:var(--muted)}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.phase{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px}.phase .tag{font-size:12px;font-weight:900;color:var(--blue)}
+.faq{display:grid;gap:10px;max-width:850px}.faq button{width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:17px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between}.answer{display:none;padding:0 17px 17px;color:var(--muted);font-size:14px}.faq-item.open .answer{display:block}.faq-item.open button{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.notice{margin-top:20px;padding:14px 16px;background:#fff8e8;border:1px solid #f7d990;border-radius:14px;color:#745514;font-size:13px}
+footer{background:#071f43;color:#dbe7f5;padding:55px 0 25px}.footer-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:35px}.footer-title{color:#fff;font-weight:900;margin-bottom:12px}.footer-links{display:grid;gap:8px;font-size:13px;color:#aebed3}.footer-bottom{border-top:1px solid rgba(255,255,255,.13);margin-top:35px;padding-top:20px;display:flex;justify-content:space-between;font-size:12px;color:#9fb0c6}
+.toast{position:fixed;right:20px;bottom:20px;background:#082b5c;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:0 15px 35px rgba(0,0,0,.2);transform:translateY(100px);opacity:0;transition:.3s;z-index:100}.toast.show{transform:none;opacity:1}
+.modal{position:fixed;inset:0;background:rgba(4,18,38,.6);display:none;place-items:center;z-index:90;padding:20px}.modal.open{display:grid}.modal-card{background:#fff;border-radius:24px;padding:25px;width:min(520px,100%);box-shadow:var(--shadow)}.modal-card h3{color:var(--navy)}.close{float:right;border:0;background:#f1f5f9;border-radius:10px;padding:7px 10px}
+@media(max-width:900px){.links{display:none}.menu{display:block}.nav-actions .lang{display:none}.hero-grid,.demo-grid,.docs,.checker{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}.grid3,.scheme-grid,.roadmap{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:1fr 1fr 1fr}.arch{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.flow i{display:none}}
+@media(max-width:560px){section{padding:60px 0}.hero{padding-top:50px}.grid4,.grid3,.scheme-grid,.filters,.formgrid,.metrics,.arch,.roadmap,.compare{grid-template-columns:1fr}.hero-ctas .btn{width:100%}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:8px}.voice-card{padding:16px}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo"><span class="logo-mark">⌁</span><span>VAANI-SETU</span></a>
+    <div class="links"><a href="#home">Home</a><a href="#how">How It Works</a><a href="#schemes">Government Schemes</a><a href="#about">About</a><a href="#faq">FAQ</a></div>
+    <div class="nav-actions">
+      <select class="lang" id="langSelect"><option>हिन्दी</option><option>English</option><option>বাংলা</option><option>मराठी</option><option>தமிழ்</option></select>
+      <button class="btn btn-primary" onclick="document.querySelector('#demo').scrollIntoView()">Try Vaani-Setu</button>
+      <button class="menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<span class="kicker"><span></span> VOICE-FIRST • MULTILINGUAL • CITIZEN-CENTRIC</span>
+<h1>One Conversation.<br><span style="color:var(--blue)">Every Government Benefit.</span></h1>
+<p>Tell us about your situation in your own language. Vaani-Setu uses AI to discover relevant government schemes, explain potential eligibility, and guide you through the next steps.</p>
+<div class="hero-ctas"><button class="btn btn-orange" onclick="startVoice()">🎙 Start a Conversation</button><a class="btn btn-light" href="#schemes">Explore Schemes →</a></div>
+<div class="trust"><span>✓ <b>Simple language</b></span><span>✓ <b>Potential-match guidance</b></span><span>✓ <b>Official-source verification</b></span></div>
+</div>
+<div class="voice-card">
+<div class="card-head"><strong>Vaani-Setu AI Assistant</strong><span class="status" id="voiceStatus">● Ready</span></div>
+<div class="chat">
+<div class="bubble user">मेरे दो बच्चे हैं, मैं गांव में रहती हूं और मेरी आय कम है। मुझे कौन-कौन सी सरकारी योजनाओं का लाभ मिल सकता है?</div>
+<div class="bubble ai"><strong>Vaani-Setu</strong><br>आपकी जानकारी के आधार पर कुछ सरकारी योजनाएँ आपके लिए प्रासंगिक हो सकती हैं। आइए आपकी eligibility को समझते हैं।</div>
+</div>
+<div class="wave" aria-label="Voice waveform"><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i></div>
+<div class="voice-controls"><button class="mic" id="micBtn" onclick="startVoice()" aria-label="Start voice">🎙</button><input class="voice-input" id="heroInput" placeholder="Type or speak your question…"/><button class="btn btn-primary" onclick="sendHero()">Send</button></div>
+</div>
+</div>
+</section>
+
+<section id="about"><div class="container">
+<div class="section-head"><span class="eyebrow">The problem</span><h2>The information exists. The access layer is broken.</h2><p>Citizens can lose valuable benefits when information is scattered, eligibility is complex, language becomes a barrier, or help depends on intermediaries.</p></div>
+<div class="grid4">
+<div class="card"><div class="icon">🗂️</div><h3>Scattered Information</h3><p>Scheme information is spread across multiple portals and sources.</p></div>
+<div class="card"><div class="icon">🧩</div><h3>Complex Eligibility</h3><p>Rules and eligibility requirements can be difficult to understand.</p></div>
+<div class="card"><div class="icon">🌐</div><h3>Language Barriers</h3><p>Important information is not always easy to access in local languages.</p></div>
+<div class="card"><div class="icon">🤝</div><h3>Intermediaries</h3><p>Citizens may depend on middlemen for information and application assistance.</p></div>
+</div>
+<div class="flow"><div>Eligible Citizen</div><i>→</i><div>Doesn't Know</div><i>→</i><div>Can't Understand</div><i>→</i><div>Doesn't Apply</div><i>→</i><div>Benefit Lost</div></div>
+</div></section>
+
+<section class="solution"><div class="container">
+<div class="section-head"><span class="eyebrow">The solution</span><h2>Meet Vaani-Setu</h2><p>A conversational AI bridge between citizens and government schemes.</p></div>
+<div class="grid3">
+<div class="card feature"><span class="num">01</span><h3>Speak Naturally</h3><p>Describe your situation in your preferred language, by voice or text.</p></div>
+<div class="card feature"><span class="num">02</span><h3>Understand the Citizen</h3><p>Extract relevant context such as income, location, family situation and priorities.</p></div>
+<div class="card feature"><span class="num">03</span><h3>Match Relevant Schemes</h3><p>Identify schemes that may fit the citizen's profile.</p></div>
+<div class="card feature"><span class="num">04</span><h3>Explain Eligibility</h3><p>Turn complex requirements into simple, understandable guidance.</p></div>
+<div class="card feature"><span class="num">05</span><h3>Guide the Application</h3><p>Provide document checklists and clear next steps without pretending to submit applications.</p></div>
+<div class="card feature"><span class="num">06</span><h3>Build Trust</h3><p>Clearly separate AI guidance from official government information and verification.</p></div>
+</div>
+</div></section>
+
+<section id="demo"><div class="container">
+<div class="section-head"><span class="eyebrow">Live prototype</span><h2>Try the Vaani-Setu AI Assistant</h2><p>Type a question or use your browser microphone. The prototype simulates AI guidance and scheme matching with local mock data.</p></div>
+<div class="demo-wrap"><div class="demo-grid">
+<div class="panel">
+<div class="card-head"><strong>Conversation</strong><span class="badge">Demo mode</span></div>
+<div class="chatbox" id="chatbox">
+<div class="bubble ai"><strong>Vaani-Setu</strong><br>Namaste! Tell me about your situation and I’ll show potential schemes to explore.</div>
+</div>
+<div class="demo-input"><button class="mic" id="demoMic" onclick="startVoice()">🎙</button><input id="chatInput" placeholder="e.g. I am a farmer with low income…"/><button class="btn btn-primary" onclick="sendChat()">Send</button></div>
+</div>
+<div class="panel dark"><div class="card-head"><strong>Citizen profile</strong><span class="status">AI match</span></div>
+<div style="margin:20px 0"><div style="display:flex;justify-content:space-between"><span>Occupation</span><b id="profileOcc">Farmer</b></div><div style="display:flex;justify-content:space-between;margin-top:10px"><span>Income</span><b id="profileIncome">Low</b></div><div style="display:flex;justify-content:space-between;margin-top:10px"><span>Location</span><b>Rural</b></div></div>
+<h4 style="margin:8px 0 12px">Potential matches</h4>
+<div class="scheme-list" id="matchList"></div>
+</div>
+</div></div>
+</div></section>
+
+<section id="schemes"><div class="container">
+<div class="section-head"><span class="eyebrow">Scheme discovery</span><h2>Find Government Schemes</h2><p>Explore prototype scheme records and filter by citizen context. Real deployments should connect this data layer to verified government sources.</p></div>
+<div class="filters">
+<select><option>All States</option><option>Uttar Pradesh</option><option>Haryana</option><option>Maharashtra</option></select>
+<select><option>Any Age</option><option>18–25</option><option>26–45</option><option>46+</option></select>
+<select><option>Any Occupation</option><option>Farmer</option><option>Student</option><option>Worker</option></select>
+<select><option>All Categories</option><option>Agriculture</option><option>Healthcare</option><option>Education</option><option>Women & Child</option></select>
+</div>
+<div class="scheme-grid" id="schemeGrid"></div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head"><span class="eyebrow">Eligibility checker</span><h2>Understand your potential benefits</h2><p>Answer a few simple questions. Results are potential matches, not guaranteed approval.</p></div>
+<div class="checker"><div class="steps"><div class="step active">01 · Basic information</div><div class="step">02 · Location</div><div class="step">03 · Occupation</div><div class="step">04 · Income</div><div class="step">05 · Family</div><div class="step">06 · Requirements</div></div>
+<div class="formbox"><div style="display:flex;justify-content:space-between"><strong>Step 4 of 6</strong><span>66%</span></div><div class="progress"><span></span></div>
+<div class="formgrid"><div class="field"><label>Occupation</label><select id="occ"><option>Farmer</option><option>Student</option><option>Self-employed</option><option>Worker</option></select></div><div class="field"><label>Income range</label><select><option>Below ₹1 lakh</option><option>₹1–3 lakh</option><option>₹3–5 lakh</option><option>Above ₹5 lakh</option></select></div><div class="field"><label>State</label><select><option>Uttar Pradesh</option><option>Haryana</option><option>Maharashtra</option></select></div><div class="field"><label>Family size</label><input value="4" type="number" min="1"/></div></div>
+<button class="btn btn-primary" style="margin-top:18px" onclick="showResults()">Check Potential Matches</button>
+<div id="results" class="results"></div>
+</div></div>
+</div></section>
+
+<section class="solution"><div class="container">
+<div class="section-head"><span class="eyebrow">Document readiness</span><h2>Know what you need before you apply</h2><p>Prepare documents ahead of time and reduce avoidable trips and confusion.</p></div>
+<div class="docs"><div class="card"><div style="display:flex;justify-content:space-between"><strong>PM-KISAN — prototype checklist</strong><b>5 of 7 ready</b></div><div class="barline" style="margin:15px 0 10px"><span></span></div><div class="doc-item"><input type="checkbox" checked/><span>Aadhaar Card</span></div><div class="doc-item"><input type="checkbox" checked/><span>Bank Account Details</span></div><div class="doc-item"><input type="checkbox" checked/><span>Residence Certificate</span></div><div class="doc-item"><input type="checkbox" checked/><span>Passport-size photograph</span></div><div class="doc-item"><input type="checkbox" checked/><span>Land / supporting documents</span></div><div class="doc-item"><input type="checkbox"/><span>Income Certificate</span></div><div class="doc-item"><input type="checkbox"/><span>Other supporting document</span></div><div style="margin-top:16px;display:flex;gap:10px"><button class="btn btn-primary" onclick="toast('Checklist prepared for demo.')">Download Checklist</button><button class="btn btn-light" onclick="toast('Saved locally for this demo.')">Save for Later</button></div></div>
+<div><div class="section-head" style="margin-bottom:18px"><span class="eyebrow">Application guidance</span><h2 style="font-size:32px">From eligibility to action</h2></div><div class="timeline"><div class="titem"><div class="tnum">1</div><div><h3>Check eligibility</h3><p>Review potential-match reasoning.</p></div></div><div class="titem"><div class="tnum">2</div><div><h3>Prepare documents</h3><p>Use your personalized checklist.</p></div></div><div class="titem"><div class="tnum">3</div><div><h3>Visit official application portal</h3><p>Verify the destination before sharing information.</p></div></div><div class="titem"><div class="tnum">4</div><div><h3>Complete application</h3><p>Follow the official portal's instructions.</p></div></div><div class="titem"><div class="tnum">5</div><div><h3>Track application status</h3><p>Use the official tracking channel.</p></div></div></div><div class="notice"><b>Trust first:</b> Always verify application details and eligibility on the official government portal. Vaani-Setu does not submit applications in this prototype.</div></div></div>
+</div></section>
+
+<section id="how"><div class="container">
+<div class="section-head"><span class="eyebrow">AI architecture</span><h2>From one conversation to actionable guidance.</h2><p>A modular architecture designed so verified scheme data and real APIs can be connected later.</p></div>
+<div class="arch">
+<div class="node">👤 Citizen<small>Voice / text</small></div><div class="node">🎙 Voice Input<small>Speech recognition</small></div><div class="node">🧠 Multilingual Understanding<small>Intent + profile extraction</small></div><div class="node">🧩 Matching Engine<small>Eligibility signals</small></div>
+<div class="node">🗃️ Trusted Knowledge Base<small>Verified scheme records</small></div><div class="node">💬 Personalized Explanation<small>Simple language</small></div><div class="node">📋 Document Checklist<small>Readiness guidance</small></div><div class="node">➡️ Citizen Action<small>Official portal / next step</small></div>
+</div>
+<div class="section-head" style="margin-top:70px"><span class="eyebrow">Journey</span><h2>Six steps. One simpler experience.</h2></div>
+<div class="grid3">
+<div class="card"><b>01 ASK</b><p>Speak in your preferred language.</p></div><div class="card"><b>02 UNDERSTAND</b><p>AI extracts profile and intent.</p></div><div class="card"><b>03 MATCH</b><p>Identify relevant schemes.</p></div><div class="card"><b>04 EXPLAIN</b><p>Understand eligibility and benefits.</p></div><div class="card"><b>05 PREPARE</b><p>Get a personalized document checklist.</p></div><div class="card"><b>06 ACT</b><p>Follow clear application steps.</p></div>
+</div>
+</div></section>
+
+<section class="solution"><div class="container">
+<div class="section-head"><span class="eyebrow">Why Vaani-Setu</span><h2>Designed around the citizen, not the portal.</h2></div>
+<div class="grid3"><div class="card"><h3>🎙 Voice-first</h3><p>Designed for people who are more comfortable speaking than navigating forms.</p></div><div class="card"><h3>🌐 Multilingual</h3><p>Language switching is a first-class part of the experience.</p></div><div class="card"><h3>🎯 Personalized</h3><p>Guidance is shaped around citizen context.</p></div><div class="card"><h3>🧠 Eligibility-aware</h3><p>Potential matches explain why they may be relevant.</p></div><div class="card"><h3>📋 Action-oriented</h3><p>Documents and next steps turn information into action.</p></div><div class="card"><h3>♿ Low-literacy friendly</h3><p>Large controls, simple language and voice interactions reduce friction.</p></div></div>
+<div class="compare" style="margin-top:24px"><div class="card"><h3>Traditional Government Portal</h3><p><b>Search → Read → Understand → Navigate → Apply</b></p><p>Many pages, unfamiliar terminology and fragmented journeys can make discovery difficult.</p></div><div class="card"><h3>Vaani-Setu</h3><p><b>Speak → Understand → Match → Explain → Act</b></p><p>A conversational access layer focused on clarity, potential eligibility and the next useful action.</p></div></div>
+</div></section>
+
+<section><div class="container">
+<div class="section-head"><span class="eyebrow">Impact</span><h2>Built for the last mile. Designed to scale.</h2></div>
+<div class="metrics"><div class="metric"><strong>↑</strong><span>Better scheme discovery</span></div><div class="metric"><strong>↓</strong><span>Information barriers</span></div><div class="metric"><strong>↓</strong><span>Intermediary dependency</span></div><div class="metric"><strong>↑</strong><span>Citizen awareness</span></div><div class="metric"><strong>∞</strong><span>Inclusion potential</span></div></div>
+<div class="card" style="margin-top:22px;min-height:190px;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 50% 50%,#eaf3ff,#fff 60%)"><div><div style="font-size:70px">🇮🇳</div><strong style="font-size:22px;color:var(--navy)">One interface. Many communities.</strong><p style="color:var(--muted);margin:4px 0">A scalable design for diverse Indian contexts.</p></div></div>
+</div></section>
+
+<section class="solution"><div class="container">
+<div class="section-head"><span class="eyebrow">Future vision</span><h2>From schemes to a complete citizen AI assistant.</h2></div>
+<div class="roadmap"><div class="phase"><span class="tag">PHASE 1</span><h3>Government Scheme Discovery</h3><p>Voice-first discovery, matching and explainers.</p></div><div class="phase"><span class="tag">PHASE 2</span><h3>Application Guidance + Documents</h3><p>Personalized preparation and official-portal navigation.</p></div><div class="phase"><span class="tag">PHASE 3</span><h3>Expand to Public Services</h3><p>Education, healthcare, employment, insurance, subsidies and social security.</p></div></div>
+<div class="card" style="margin-top:22px;text-align:center"><h3 style="font-size:24px">“A trusted AI interface through which every citizen can understand and access public services.”</h3></div>
+</div></section>
+
+<section id="faq"><div class="container"><div class="section-head"><span class="eyebrow">FAQ</span><h2>Questions citizens may ask.</h2></div><div class="faq">
+<div class="faq-item"><button onclick="faq(this)">What is Vaani-Setu? <span>＋</span></button><div class="answer">A voice-first, multilingual AI prototype that helps citizens discover potential government-scheme matches and understand next steps.</div></div>
+<div class="faq-item"><button onclick="faq(this)">How does Vaani-Setu find relevant schemes? <span>＋</span></button><div class="answer">The prototype uses structured mock scheme data and citizen-context signals. A production system can connect this layer to verified government data sources.</div></div>
+<div class="faq-item"><button onclick="faq(this)">Which languages are supported? <span>＋</span></button><div class="answer">The UI demonstrates Hindi, English, Bengali, Marathi and Tamil language choices. Voice recognition depends on browser support.</div></div>
+<div class="faq-item"><button onclick="faq(this)">Does Vaani-Setu guarantee eligibility? <span>＋</span></button><div class="answer">No. Results are potential eligibility guidance only. Final eligibility is determined by the relevant authority and official rules.</div></div>
+<div class="faq-item"><button onclick="faq(this)">Does Vaani-Setu submit applications? <span>＋</span></button><div class="answer">No. This prototype never pretends to submit a government application.</div></div>
+<div class="faq-item"><button onclick="faq(this)">How is citizen information handled? <span>＋</span></button><div class="answer">This frontend prototype does not require sensitive personal information and stores no citizen profile on a server.</div></div>
+<div class="faq-item"><button onclick="faq(this)">Can I use Vaani-Setu on mobile? <span>＋</span></button><div class="answer">Yes. The layout is responsive and the primary interactions are designed for touch.</div></div>
+<div class="faq-item"><button onclick="faq(this)">Where can I verify official scheme information? <span>＋</span></button><div class="answer">Use the official government portal or department source for the latest rules, documents, deadlines and application status.</div></div>
+</div></div></section>
+</main>
+
+<footer><div class="container"><div class="footer-grid">
+<div><div class="logo" style="color:#fff"><span class="logo-mark">⌁</span><span>VAANI-SETU</span></div><p style="color:#aebed3;max-width:320px">One Conversation. Every Government Benefit.</p></div>
+<div><div class="footer-title">Explore</div><div class="footer-links"><a href="#home">Home</a><a href="#schemes">Schemes</a><a href="#how">How It Works</a></div></div>
+<div><div class="footer-title">Product</div><div class="footer-links"><a href="#demo">AI Assistant</a><a href="#faq">FAQ</a><a href="#about">About</a></div></div>
+<div><div class="footer-title">Trust</div><div class="footer-links"><span>Privacy</span><span>Terms</span><span>Official-source verification</span></div></div>
+</div><div class="footer-bottom"><span>© 2026 Vaani-Setu Prototype</span><b>CodeFusion 2026 — Grand Finale</b></div></div></footer>
+
+<div class="modal" id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><h3 id="modalTitle"></h3><p id="modalText" style="color:var(--muted)"></p><div class="notice">Prototype guidance only. Verify eligibility, documents and application details on the official government portal.</div></div></div>
+
+<script>
+const schemes=[
+{name:"PM-KISAN",cat:"Agriculture",dept:"Department of Agriculture",match:92,benefit:"Financial support for eligible farmer families.",elig:"Eligible landholding farmer families, subject to official rules.",docs:"Aadhaar, bank details, land/supporting records"},
+{name:"Ayushman Bharat",cat:"Healthcare",dept:"Ministry of Health & Family Welfare",match:84,benefit:"Health coverage for eligible beneficiaries.",elig:"Eligibility depends on the applicable beneficiary database and rules.",docs:"Identity and beneficiary verification documents"},
+{name:"State Social Assistance",cat:"Social Security",dept:"State Government",match:76,benefit:"Potential assistance for eligible low-income households.",elig:"Varies by state and scheme.",docs:"Income, residence and identity documents"},
+{name:"PMAY",cat:"Housing",dept:"Ministry of Housing & Urban Affairs",match:73,benefit:"Potential housing assistance for eligible households.",elig:"Depends on household, income and housing criteria.",docs:"Identity, income, residence and property-related records"},
+{name:"Scholarship Support",cat:"Education",dept:"Education Department",match:68,benefit:"Potential financial support for eligible students.",elig:"Depends on course, income, institution and state rules.",docs:"Student ID, income and education records"},
+{name:"Women & Child Support",cat:"Women & Child",dept:"Women & Child Development",match:71,benefit:"Potential support services for eligible women and children.",elig:"Depends on the applicable program and local rules.",docs:"Identity, residence and family-related records"}
+];
+function schemeCard(s){
+return `<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><span class="badge">${s.cat}</span><h3 style="margin-top:10px">${s.name}</h3></div><div class="score">${s.match}%</div></div><small>${s.dept}</small><p style="margin:12px 0;color:var(--muted)">${s.benefit}</p><p style="font-size:12px;color:#55657a"><b>Eligibility:</b> ${s.elig}</p><button class="btn btn-primary" onclick="openModal('${s.name}')">Check Eligibility</button></div>`;
+}
+document.getElementById('schemeGrid').innerHTML=schemes.map(schemeCard).join('');
+document.getElementById('matchList').innerHTML=schemes.slice(0,3).map(s=>`<div class="scheme"><div class="scheme-top"><strong>${s.name}</strong><span class="match">${s.match}% Match</span></div><small>${s.cat}</small><p>${s.benefit}</p><button onclick="openModal('${s.name}')">View Details</button></div>`).join('');
+
+function openModal(name){const s=schemes.find(x=>x.name===name);document.getElementById('modalTitle').textContent=s.name;document.getElementById('modalText').innerHTML='<b>Potential match:</b> '+s.match+'%<br><br><b>Eligibility:</b> '+s.elig+'<br><br><b>Documents:</b> '+s.docs;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+function faq(btn){const item=btn.parentElement;document.querySelectorAll('.faq-item').forEach(x=>{if(x!==item)x.classList.remove('open')});item.classList.toggle('open')}
+function sendHero(){const v=document.getElementById('heroInput').value.trim();if(!v){toast('Type a question or tap the microphone.');return}document.getElementById('chatInput').value=v;document.querySelector('#demo').scrollIntoView({behavior:'smooth'});setTimeout(sendChat,500)}
+function appendChat(who,text){const box=document.getElementById('chatbox');const d=document.createElement('div');d.className='bubble '+(who==='You'?'user':'ai');d.innerHTML=who==='You'?text:'<strong>Vaani-Setu</strong><br>'+text;box.appendChild(d);box.scrollTop=box.scrollHeight}
+function sendChat(){const input=document.getElementById('chatInput');const q=input.value.trim();if(!q){toast('Please enter a question.');return}appendChat('You',q);input.value='';const typing=document.createElement('div');typing.className='bubble ai';typing.id='typing';typing.innerHTML='<strong>Vaani-Setu</strong><br>Understanding your request…';document.getElementById('chatbox').appendChild(typing);setTimeout(()=>{typing.remove();appendChat('AI','Based on the information you shared, I found a few <b>potentially relevant</b> schemes. I’ll show the matches on the right. Final eligibility must be verified against official rules.');toast('3 potential matches found.');},900)}
+function showResults(){document.getElementById('results').innerHTML=schemes.slice(0,3).map(s=>`<div class="result"><div><b>${s.name}</b><p>${s.benefit}</p><small>Why it may match: your selected profile contains signals relevant to this scheme.</small></div><span class="match">${s.match}% Match</span></div>`).join('');toast('Potential benefits calculated for the demo.')}
+function toggleMenu(){const links=document.querySelector('.links');links.style.display=links.style.display==='flex'?'none':'flex';if(links.style.display==='flex'){links.style.position='absolute';links.style.top='72px';links.style.left='0';links.style.right='0';links.style.background='#fff';links.style.padding='18px 4%';links.style.flexDirection='column';links.style.borderBottom='1px solid var(--line)'}}
+function startVoice(){
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+const btn=document.getElementById('micBtn');const demo=document.getElementById('demoMic');
+if(!SpeechRecognition){toast('Voice recognition is not available in this browser. You can type instead.');return}
+const rec=new SpeechRecognition();rec.lang=(document.getElementById('langSelect').value==='हिन्दी'?'hi-IN':'en-IN');rec.interimResults=false;rec.maxAlternatives=1;
+if(btn)btn.classList.add('listening');if(demo)demo.classList.add('listening');document.getElementById('voiceStatus').textContent='● Listening…';
+rec.onresult=e=>{const text=e.results[0][0].transcript;document.getElementById('heroInput').value=text;document.getElementById('chatInput').value=text;document.getElementById('voiceStatus').textContent='● Response';toast('Voice captured. Your question is ready.');};
+rec.onerror=()=>toast('Could not capture voice. Please try again or type your question.');
+rec.onend=()=>{if(btn)btn.classList.remove('listening');if(demo)demo.classList.remove('listening');document.getElementById('voiceStatus').textContent='● Ready'};
+rec.start();
+}
+document.getElementById('langSelect').addEventListener('change',e=>toast('Language selected: '+e.target.value));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
