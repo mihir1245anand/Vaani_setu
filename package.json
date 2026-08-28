@@ -6,10 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "serve": "node server.js",
     "test": "mocha \"tests/*.test.js\"",
     "lint": "node --check server.js && node --check src/js/app.js && node --check src/js/i18n.js && node --check src/js/schemes.js"
   },
   "keywords": [
+    "vaani-setu",
     "government-schemes",
     "multilingual",
     "voice-assistant",
