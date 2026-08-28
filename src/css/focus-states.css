@@ -1,0 +1,18 @@
+﻿/* Focus Visible and High-Contrast Accessibility Enhancements */
+:focus-visible {
+    outline: 3px solid #e8871e !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(232, 135, 30, 0.25) !important;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.high-contrast-mode {
+    --color-surface-light: #000000;
+    --color-surface-white: #121212;
+    --color-text-dark: #ffffff;
+    --color-text-muted: #e2e8f0;
+}
