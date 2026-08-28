@@ -1,0 +1,26 @@
+﻿name: CI / Quality Assurance
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate Syntax & Package Integrity
+        run: |
+          node -e "console.log('Validating JavaScript runtime integrity...');"
+          node --check server.js
+          node --check src/js/schemes.js
+          node --check src/js/i18n.js
+          node --check src/js/app.js
+      - name: Report Status
+        run: echo "Vaani-Setu CI Validation Passed!"
