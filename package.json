@@ -1,0 +1,21 @@
+{
+  "name": "vaani-setu-prototype",
+  "version": "1.0.0",
+  "description": "Vaani-Setu — One Conversation. Every Government Benefit. Voice-First Multilingual AI Prototype for Indian Citizens.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "vaani-setu",
+    "govtech",
+    "multilingual",
+    "ai-assistant",
+    "voice-first",
+    "digital-india"
+  ],
+  "author": "Vaani-Setu Team",
+  "license": "MIT"
+}

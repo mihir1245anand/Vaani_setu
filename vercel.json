@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "vaani-setu-prototype",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
