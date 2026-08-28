@@ -1,21 +1,24 @@
-﻿{
-  ""name"": ""vaani-setu"",
-  ""version"": ""1.0.0"",
-  ""description"": ""AI-powered Multilingual Citizen Portal for Government Scheme Discovery"",
-  ""main"": ""server.js"",
-  ""scripts"": {
-    ""start"": ""node server.js"",
-    ""dev"": ""node server.js"",
-    ""test"": ""node tests/smoke.test.js && node tests/eligibility.test.js && node tests/i18n.test.js"",
-    ""lint"": ""node --check server.js && node --check src/js/*.js""
+{
+  "name": "vaani-setu",
+  "version": "1.0.0",
+  "description": "AI-powered Multilingual Citizen Portal for Government Scheme Discovery",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "mocha \"tests/*.test.js\"",
+    "lint": "node --check server.js && node --check src/js/app.js && node --check src/js/i18n.js && node --check src/js/schemes.js"
   },
-  ""keywords"": [
-    ""government-schemes"",
-    ""multilingual"",
-    ""voice-assistant"",
-    ""accessibility"",
-    ""india""
+  "keywords": [
+    "government-schemes",
+    "multilingual",
+    "voice-assistant",
+    "accessibility",
+    "india"
   ],
-  ""author"": ""Vaani-Setu Team"",
-  ""license"": ""MIT""
+  "author": "Vaani-Setu Team",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^11.7.2"
+  }
 }
