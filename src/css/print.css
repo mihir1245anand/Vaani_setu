@@ -1,0 +1,24 @@
+﻿/* Print & High-Accessibility Styles for Vaani-Setu Eligibility Checklist */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+    }
+
+    nav, .voice-mic-btn, .chat-input-bar, button.action-btn, footer {
+        display: none !important;
+    }
+
+    .checklist-container, .scheme-card {
+        border: 1px solid #cccccc !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        margin-bottom: 20px;
+    }
+
+    a[href]:after {
+        content: "" ("" attr(href) "")"";
+        font-size: 9pt;
+    }
+}
